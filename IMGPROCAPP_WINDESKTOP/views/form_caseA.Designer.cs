@@ -71,6 +71,7 @@
             this.pic_org.Location = new System.Drawing.Point(38, 65);
             this.pic_org.Name = "pic_org";
             this.pic_org.Size = new System.Drawing.Size(474, 271);
+            this.pic_org.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic_org.TabIndex = 7;
             this.pic_org.TabStop = false;
             // 
@@ -80,6 +81,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(38, 367);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(474, 271);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             // 
@@ -111,6 +113,7 @@
             this.btn_cutImg.TabIndex = 11;
             this.btn_cutImg.Text = "Cut with 2P.";
             this.btn_cutImg.UseVisualStyleBackColor = true;
+            this.btn_cutImg.Click += new System.EventHandler(this.btn_cutImg_Click);
             // 
             // btn_maskImg
             // 
@@ -129,6 +132,7 @@
             this.btn_clear.TabIndex = 13;
             this.btn_clear.Text = "Clear";
             this.btn_clear.UseVisualStyleBackColor = true;
+            this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
             // 
             // btn_Save
             // 

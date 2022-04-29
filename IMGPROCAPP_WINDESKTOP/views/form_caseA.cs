@@ -14,6 +14,12 @@ namespace IMGPROCAPP_WINDESKTOP
 {
     public partial class form_caseA : Form
     {
+        private const string WINDOW_CUT = "WINDOW_CUT";
+
+
+        public Mat imgRead = new Mat();
+
+
         public form_caseA()
         {
             InitializeComponent();
@@ -36,14 +42,35 @@ namespace IMGPROCAPP_WINDESKTOP
                 OpenFileDialog ofd = new OpenFileDialog();
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    Mat image = Cv2.ImRead(ofd.FileName);
-                    pic_org.Image = BitmapConverter.ToBitmap(image);
+                    imgRead = Cv2.ImRead(ofd.FileName);
+                    pic_org.Image = BitmapConverter.ToBitmap(imgRead);
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btn_clear_Click(object sender, EventArgs e)
+        {
+            if (pic_org.Image != null) {
+                pic_org.Image.Dispose();
+                pic_org.Image = null;
+            }
+
+        }
+
+        private void btn_cutImg_Click(object sender, EventArgs e)
+        {
+            // create window...
+            window winCut = new window(WINDOW_CUT);
+            winCut.setWindow(imgRead);
+            Cv2.ImShow(WINDOW_CUT, imgRead);
+
+
+            // set mouse event handler...
+
         }
     }
 }

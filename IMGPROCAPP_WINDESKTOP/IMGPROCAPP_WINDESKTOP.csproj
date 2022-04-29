@@ -111,6 +111,7 @@
     <Compile Include="views\form_caseB.Designer.cs">
       <DependentUpon>form_caseB.cs</DependentUpon>
     </Compile>
+    <Compile Include="window.cs" />
     <EmbeddedResource Include="views\entry.resx">
       <DependentUpon>entry.cs</DependentUpon>
     </EmbeddedResource>
