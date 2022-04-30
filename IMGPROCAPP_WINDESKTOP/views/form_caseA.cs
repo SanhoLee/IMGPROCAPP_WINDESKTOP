@@ -14,10 +14,13 @@ namespace IMGPROCAPP_WINDESKTOP
 {
     public partial class form_caseA : Form
     {
-        private const string WINDOW_CUT = "WINDOW_CUT";
+        public static string WINDOW_CUT = "WINDOW_CUT";
 
 
-        public Mat imgRead = new Mat();
+        public static Mat imgRead = new Mat();
+        public static Mat imgWork = new Mat();
+        public static Rect cutRect_G = new Rect();
+
 
 
         public form_caseA()
@@ -27,6 +30,8 @@ namespace IMGPROCAPP_WINDESKTOP
 
         private void form_caseA_Load(object sender, EventArgs e)
         {
+            // initializing...
+            init_btns(0);
 
         }
 
@@ -44,6 +49,12 @@ namespace IMGPROCAPP_WINDESKTOP
                 {
                     imgRead = Cv2.ImRead(ofd.FileName);
                     pic_org.Image = BitmapConverter.ToBitmap(imgRead);
+
+                    btn_cutImg.Enabled = true;
+                    btn_maskImg.Enabled = true;
+                    btn_clr_proc.Enabled = true;
+                    btn_set_Params.Enabled = true;
+                    btn_run_proc.Enabled = true;
                 }
             }
             catch (Exception ex)
@@ -57,6 +68,7 @@ namespace IMGPROCAPP_WINDESKTOP
             if (pic_org.Image != null) {
                 pic_org.Image.Dispose();
                 pic_org.Image = null;
+                init_btns(0);
             }
 
         }
@@ -64,32 +76,89 @@ namespace IMGPROCAPP_WINDESKTOP
 
         private void btn_cutImg_Click(object sender, EventArgs e)
         {
+            btn_cutImg.Enabled = false;
+
             // create window...
             window winCut = new window(WINDOW_CUT);
             winCut.setWindow(imgRead, sender);
 
             // make callback instance.
             mousecallback_imgcut mcImgCut = new mousecallback_imgcut();
-            
-            // set mouse event handler...
-            Cv2.SetMouseCallback(WINDOW_CUT, mcImgCut.callBackFunc);
 
-            while (true)
+            // set mouse event handler...
+            imgWork = imgRead.Clone();
+            Cv2.SetMouseCallback(WINDOW_CUT, mcImgCut.callBackFunc);
+            Cv2.ImShow(WINDOW_CUT, imgWork);
+            int rtnKey = Cv2.WaitKey(0);
+            if (rtnKey == 32)    // esc key
             {
-                Cv2.ImShow(WINDOW_CUT, imgRead);
-                int k = Cv2.WaitKey(1);
-                if (k == 27)    // esc key
+                string msg = "Cut img ? ";
+                string caption = "Confirm Cut Img";
+                MessageBoxButtons msgBoxBtn = MessageBoxButtons.YesNo;
+                DialogResult result;
+
+                result = MessageBox.Show(msg, caption, msgBoxBtn);
+                if (result == DialogResult.Yes)
                 {
-                    Cv2.DestroyWindow(WINDOW_CUT); 
-                    Console.WriteLine("Destroy Current Window...");
-                    break;
-                } else if (k == -1) {
-                    continue; 
-                } else {
-                    Console.WriteLine("now Pressed Key number : " + k);
+                    dlgProc_cutImg();
+                    Cv2.DestroyWindow(WINDOW_CUT);
+                }
+                else
+                {
                 }
             }
             
+
+
+        }
+
+        private void dlgProc_cutImg() {
+            Console.WriteLine("yes clicked...");
+
+
+
+            btn_cutImg.Enabled = true;
+        }
+
+        private void init_btns(int sw)
+        {
+            /*
+             sw(switch)
+                0 : status for loading this form.
+             
+             
+             
+             
+             */
+
+
+            switch (sw) {
+            
+                case 0:
+                    btn_clear.Enabled = true;
+                    btn_load.Enabled = true;
+                    btn_close.Enabled = true;
+                    btn_clr_proc.Enabled = true;
+                    btn_set_Params.Enabled = true;
+
+                    btn_cutImg.Enabled = false;
+                    btn_maskImg.Enabled = false;
+                    btn_run_proc.Enabled = false;
+                    btn_Save.Enabled = false;
+                    btn_clr_proc.Enabled= false;
+                    btn_set_Params.Enabled = false;
+                    break;
+                case 1:
+                    break;
+
+                default:
+                    break;
+            }
+
+
+
+
+
 
 
         }

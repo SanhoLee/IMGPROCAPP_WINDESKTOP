@@ -38,9 +38,9 @@
             this.btn_maskImg = new System.Windows.Forms.Button();
             this.btn_clear = new System.Windows.Forms.Button();
             this.btn_Save = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btn_set_Params = new System.Windows.Forms.Button();
+            this.btn_run_proc = new System.Windows.Forms.Button();
+            this.btn_clr_proc = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pic_org)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -143,41 +143,41 @@
             this.btn_Save.Text = "Save Pixels";
             this.btn_Save.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btn_set_Params
             // 
-            this.button1.Location = new System.Drawing.Point(532, 413);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(164, 40);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Set Parameters";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_set_Params.Location = new System.Drawing.Point(532, 413);
+            this.btn_set_Params.Name = "btn_set_Params";
+            this.btn_set_Params.Size = new System.Drawing.Size(164, 40);
+            this.btn_set_Params.TabIndex = 15;
+            this.btn_set_Params.Text = "Set Parameters";
+            this.btn_set_Params.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btn_run_proc
             // 
-            this.button2.Location = new System.Drawing.Point(532, 459);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(164, 40);
-            this.button2.TabIndex = 16;
-            this.button2.Text = "Run Processing";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_run_proc.Location = new System.Drawing.Point(532, 459);
+            this.btn_run_proc.Name = "btn_run_proc";
+            this.btn_run_proc.Size = new System.Drawing.Size(164, 40);
+            this.btn_run_proc.TabIndex = 16;
+            this.btn_run_proc.Text = "Run Processing";
+            this.btn_run_proc.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btn_clr_proc
             // 
-            this.button3.Location = new System.Drawing.Point(532, 367);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(164, 40);
-            this.button3.TabIndex = 17;
-            this.button3.Text = "Clear Processing";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_clr_proc.Location = new System.Drawing.Point(532, 367);
+            this.btn_clr_proc.Name = "btn_clr_proc";
+            this.btn_clr_proc.Size = new System.Drawing.Size(164, 40);
+            this.btn_clr_proc.TabIndex = 17;
+            this.btn_clr_proc.Text = "Clear Processing";
+            this.btn_clr_proc.UseVisualStyleBackColor = true;
             // 
             // form_caseA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(709, 675);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_clr_proc);
+            this.Controls.Add(this.btn_run_proc);
+            this.Controls.Add(this.btn_set_Params);
             this.Controls.Add(this.btn_Save);
             this.Controls.Add(this.btn_clear);
             this.Controls.Add(this.btn_maskImg);
@@ -210,8 +210,8 @@
         private System.Windows.Forms.Button btn_maskImg;
         private System.Windows.Forms.Button btn_clear;
         private System.Windows.Forms.Button btn_Save;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btn_set_Params;
+        private System.Windows.Forms.Button btn_run_proc;
+        private System.Windows.Forms.Button btn_clr_proc;
     }
 }
