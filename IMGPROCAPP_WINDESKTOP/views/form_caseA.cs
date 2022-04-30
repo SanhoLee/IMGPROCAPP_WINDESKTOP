@@ -61,15 +61,36 @@ namespace IMGPROCAPP_WINDESKTOP
 
         }
 
+
         private void btn_cutImg_Click(object sender, EventArgs e)
         {
             // create window...
             window winCut = new window(WINDOW_CUT);
-            winCut.setWindow(imgRead);
-            Cv2.ImShow(WINDOW_CUT, imgRead);
+            winCut.setWindow(imgRead, sender);
 
-
+            // make callback instance.
+            mousecallback_imgcut mcImgCut = new mousecallback_imgcut();
+            
             // set mouse event handler...
+            Cv2.SetMouseCallback(WINDOW_CUT, mcImgCut.callBackFunc);
+
+            while (true)
+            {
+                Cv2.ImShow(WINDOW_CUT, imgRead);
+                int k = Cv2.WaitKey(1);
+                if (k == 27)    // esc key
+                {
+                    Cv2.DestroyWindow(WINDOW_CUT); 
+                    Console.WriteLine("Destroy Current Window...");
+                    break;
+                } else if (k == -1) {
+                    continue; 
+                } else {
+                    Console.WriteLine("now Pressed Key number : " + k);
+                }
+            }
+            
+
 
         }
     }

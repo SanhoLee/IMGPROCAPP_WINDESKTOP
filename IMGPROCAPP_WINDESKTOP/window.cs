@@ -37,7 +37,15 @@ namespace IMGPROCAPP_WINDESKTOP
             height = (int)(imgHeight * ratio);
         }
 
-        public void setWindow(Mat img) {
+        public void setWindow(Mat img, object btnSender) {
+
+            if(img == null)
+            {
+                Button btn = btnSender as Button;
+                MessageBox.Show("Failed on setWindow :: Button " + btn.Text);
+                return;
+            }
+            
             calcRatioWithSCR(img);  // calculate window size with screen size.
 
             Cv2.NamedWindow(win_name, WindowFlags.Normal);
