@@ -16,9 +16,12 @@ namespace IMGPROCAPP_WINDESKTOP
         private Mat imgShowLocal = new Mat();
         private readonly string str_winCut = form_caseA.WINDOW_CUT;
 
-        
 
-
+        private readonly Scalar readyColor = new Scalar(255, 0, 255);
+        private readonly Scalar selectedColor = new Scalar(0, 255, 0);
+        private readonly int rectThick = 5;
+        private readonly int circleThick = 5;
+        private readonly int circleRad = 10;
 
         public mousecallback_imgcut() {
             Console.WriteLine("imgcut mousecallback function is fired...");
@@ -27,54 +30,67 @@ namespace IMGPROCAPP_WINDESKTOP
         public void callBackFunc(MouseEventTypes @event, int x, int y, MouseEventFlags flags, IntPtr userData)
         {
             if (@event == MouseEventTypes.LButtonDown) {
-                if (numSqurePnt == 0)
-                {
-                    imgShowLocal = form_caseA.imgWork.Clone();
-                }
-
-                numSqurePnt++;
-                lstSqurePnt.Add(new Point(x, y));
-
-                if (numSqurePnt > 2)
-                {
-                    lstSqurePnt.Clear();
-                    numSqurePnt = 0;
-                    imgShowLocal.Dispose();
-                    imgShowLocal = form_caseA.imgWork.Clone();
-                }
-                else if (numSqurePnt == 2) {
-                    int width = lstSqurePnt[1].X - lstSqurePnt[0].X;
-                    int height = lstSqurePnt[1].Y - lstSqurePnt[0].Y;
-
-                    rect = new Rect(lstSqurePnt[0].X, lstSqurePnt[0].Y, width, height);
-                    Cv2.Circle(imgShowLocal, new Point(x, y), 10, new Scalar(200, 0, 0), 3);
-                    Cv2.Rectangle(imgShowLocal, rect, new Scalar(0, 0, 255), 10, LineTypes.Link4);
-                }
-                else
-                {
-                    Console.WriteLine("point number " + numSqurePnt + " - x : " + x + ", \t y : " + y);
-                    Cv2.Circle(imgShowLocal, new Point(x, y), 10, new Scalar(200, 0, 0), 3);
-                }
-
-                Cv2.ImShow(str_winCut, imgShowLocal);
-            
-            }else if(@event == MouseEventTypes.MButtonDown) {   // finish status.
-                Cv2.Rectangle(imgShowLocal, rect, new Scalar(0, 255, 0), 12, LineTypes.Link4);
-                Cv2.ImShow(str_winCut, imgShowLocal);
-
-                // copy rect object into global scope.
-                form_caseA.cutRect_G = rect;
+                procLeftBtn(x,y);
+            }
+            else if(@event == MouseEventTypes.MButtonDown && numSqurePnt == 2) {   // finish status.
+                procMidBtn();
             }
             else if(@event == MouseEventTypes.RButtonDown) {   // reset status.
-                numSqurePnt = 0;
-                lstSqurePnt.Clear();
-                imgShowLocal.Dispose();
-
-                imgShowLocal = form_caseA.imgWork.Clone();
-                Cv2.ImShow(str_winCut, imgShowLocal);
+                procRightBtn();
             }
 
+            // show working img anyway...
+            if(!imgShowLocal.Empty()) {
+                Cv2.ImShow(str_winCut, imgShowLocal);
+            }
+        }
 
+        private void procLeftBtn(int x, int y) {
+            if (numSqurePnt == 0)
+            {
+                imgShowLocal = form_caseA.imgWork.Clone();
+                form_caseA.numSqrtPnts = numSqurePnt;
+            }
+
+            numSqurePnt++;
+            lstSqurePnt.Add(new Point(x, y));
+
+            if (numSqurePnt > 2)
+            {
+                lstSqurePnt.Clear();
+                numSqurePnt = 0;
+                imgShowLocal.Dispose();
+                imgShowLocal = form_caseA.imgWork.Clone();
+            }
+            else if (numSqurePnt == 2)
+            {
+                int width = lstSqurePnt[1].X - lstSqurePnt[0].X;
+                int height = lstSqurePnt[1].Y - lstSqurePnt[0].Y;
+
+                rect = new Rect(lstSqurePnt[0].X, lstSqurePnt[0].Y, width, height);
+                Cv2.Circle(imgShowLocal, new Point(x, y), circleRad, readyColor, circleThick);
+                Cv2.Rectangle(imgShowLocal, rect, readyColor, rectThick, LineTypes.Link4);
+            }
+            else
+            {
+                Console.WriteLine("point number " + numSqurePnt + " - x : " + x + ", \t y : " + y);
+                Cv2.Circle(imgShowLocal, new Point(x, y), circleRad, readyColor, circleThick);
+            }
+        }
+        private void procMidBtn() {
+            // copy rect object into global scope.
+            form_caseA.cutRect_G = rect;
+            form_caseA.numSqrtPnts = numSqurePnt;
+
+            Cv2.Rectangle(imgShowLocal, rect, selectedColor, (rectThick + 3), LineTypes.Link4);
+        }
+        private void procRightBtn() {
+            numSqurePnt = 0;
+            lstSqurePnt.Clear();
+            imgShowLocal.Dispose();
+
+            imgShowLocal = form_caseA.imgWork.Clone();
+            form_caseA.numSqrtPnts = numSqurePnt;
         }
 
         ~mousecallback_imgcut() {

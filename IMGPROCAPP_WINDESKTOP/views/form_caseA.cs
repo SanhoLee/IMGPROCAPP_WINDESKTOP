@@ -19,7 +19,10 @@ namespace IMGPROCAPP_WINDESKTOP
 
         public static Mat imgRead = new Mat();
         public static Mat imgWork = new Mat();
+        public static Mat imgGray = new Mat();
+
         public static Rect cutRect_G = new Rect();
+        public static int numSqrtPnts;
 
 
 
@@ -49,12 +52,12 @@ namespace IMGPROCAPP_WINDESKTOP
                 {
                     imgRead = Cv2.ImRead(ofd.FileName);
                     pic_org.Image = BitmapConverter.ToBitmap(imgRead);
+                    pic_rst.Image = null;
 
                     btn_cutImg.Enabled = true;
                     btn_maskImg.Enabled = true;
                     btn_clr_proc.Enabled = true;
                     btn_set_Params.Enabled = true;
-                    btn_run_proc.Enabled = true;
                 }
             }
             catch (Exception ex)
@@ -66,8 +69,6 @@ namespace IMGPROCAPP_WINDESKTOP
         private void btn_clear_Click(object sender, EventArgs e)
         {
             if (pic_org.Image != null) {
-                pic_org.Image.Dispose();
-                pic_org.Image = null;
                 init_btns(0);
             }
 
@@ -77,6 +78,7 @@ namespace IMGPROCAPP_WINDESKTOP
         private void btn_cutImg_Click(object sender, EventArgs e)
         {
             btn_cutImg.Enabled = false;
+            numSqrtPnts = 0;
 
             // create window...
             window winCut = new window(WINDOW_CUT);
@@ -88,36 +90,48 @@ namespace IMGPROCAPP_WINDESKTOP
             // set mouse event handler...
             imgWork = imgRead.Clone();
             Cv2.SetMouseCallback(WINDOW_CUT, mcImgCut.callBackFunc);
-            Cv2.ImShow(WINDOW_CUT, imgWork);
-            int rtnKey = Cv2.WaitKey(0);
-            if (rtnKey == 32)    // esc key
-            {
-                string msg = "Cut img ? ";
-                string caption = "Confirm Cut Img";
-                MessageBoxButtons msgBoxBtn = MessageBoxButtons.YesNo;
-                DialogResult result;
 
-                result = MessageBox.Show(msg, caption, msgBoxBtn);
-                if (result == DialogResult.Yes)
+
+            while (true)
+            {
+                Cv2.ImShow(WINDOW_CUT, imgWork);
+                int rtnKey = Cv2.WaitKey(0);
+
+                if (rtnKey == 32 && numSqrtPnts == 2)    // space bar key
                 {
-                    dlgProc_cutImg();
-                    Cv2.DestroyWindow(WINDOW_CUT);
+                    string msg = "Cut img ? ";
+                    string caption = "Confirm Cut Img";
+                    MessageBoxButtons msgBoxBtn = MessageBoxButtons.YesNo;
+                    DialogResult result;
+
+                    result = MessageBox.Show(msg, caption, msgBoxBtn);
+                    if (result == DialogResult.Yes)
+                    {
+                        dlgProc_cutImg();
+                        Cv2.DestroyWindow(WINDOW_CUT);
+                        break;
+                    }
+                    else
+                    {
+                        numSqrtPnts = 0;
+                    }
                 }
-                else
-                {
-                }
+                else { continue; }
             }
-            
+
 
 
         }
 
         private void dlgProc_cutImg() {
             Console.WriteLine("yes clicked...");
-
-
-
             btn_cutImg.Enabled = true;
+
+            Cv2.CvtColor(imgRead, imgGray, ColorConversionCodes.BGR2GRAY);  // change color space into gray.
+            Mat rstImg = new Mat(imgGray, cutRect_G);   // cut img with rect object.
+
+            // put cut img into result pictureBox.
+            pic_rst.Image = BitmapConverter.ToBitmap(rstImg);
         }
 
         private void init_btns(int sw)
@@ -127,14 +141,14 @@ namespace IMGPROCAPP_WINDESKTOP
                 0 : status for loading this form.
              
              
-             
-             
              */
-
 
             switch (sw) {
             
                 case 0:
+                    pic_org.Image = null;
+                    pic_rst.Image = null;
+
                     btn_clear.Enabled = true;
                     btn_load.Enabled = true;
                     btn_close.Enabled = true;
@@ -147,6 +161,8 @@ namespace IMGPROCAPP_WINDESKTOP
                     btn_Save.Enabled = false;
                     btn_clr_proc.Enabled= false;
                     btn_set_Params.Enabled = false;
+
+
                     break;
                 case 1:
                     break;

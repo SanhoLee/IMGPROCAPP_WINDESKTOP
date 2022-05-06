@@ -31,7 +31,7 @@
             this.btn_close = new System.Windows.Forms.Button();
             this.btn_load = new System.Windows.Forms.Button();
             this.pic_org = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pic_rst = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btn_cutImg = new System.Windows.Forms.Button();
@@ -42,7 +42,7 @@
             this.btn_run_proc = new System.Windows.Forms.Button();
             this.btn_clr_proc = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pic_org)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_rst)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_close
@@ -75,15 +75,15 @@
             this.pic_org.TabIndex = 7;
             this.pic_org.TabStop = false;
             // 
-            // pictureBox1
+            // pic_rst
             // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(38, 367);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(474, 271);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 8;
-            this.pictureBox1.TabStop = false;
+            this.pic_rst.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pic_rst.Location = new System.Drawing.Point(38, 367);
+            this.pic_rst.Name = "pic_rst";
+            this.pic_rst.Size = new System.Drawing.Size(474, 271);
+            this.pic_rst.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pic_rst.TabIndex = 8;
+            this.pic_rst.TabStop = false;
             // 
             // label1
             // 
@@ -184,7 +184,7 @@
             this.Controls.Add(this.btn_cutImg);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pic_rst);
             this.Controls.Add(this.pic_org);
             this.Controls.Add(this.btn_load);
             this.Controls.Add(this.btn_close);
@@ -193,7 +193,7 @@
             this.Text = "form_caseA";
             this.Load += new System.EventHandler(this.form_caseA_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pic_org)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_rst)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,7 +203,7 @@
         private System.Windows.Forms.Button btn_close;
         private System.Windows.Forms.Button btn_load;
         private System.Windows.Forms.PictureBox pic_org;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pic_rst;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_cutImg;
