@@ -15,14 +15,23 @@ namespace IMGPROCAPP_WINDESKTOP
     public partial class form_caseA : Form
     {
         public static string WINDOW_CUT = "WINDOW_CUT";
+        public static string WINDOW_MASK = "WINDOW_MASK";
+
 
 
         public static Mat imgRead = new Mat();
         public static Mat imgWork = new Mat();
         public static Mat imgGray = new Mat();
+        public static Mat imgCut = new Mat();
+        public static Mat imgMask = new Mat();
 
         public static Rect cutRect_G = new Rect();
         public static int numSqrtPnts;
+        public static int numPolyPnts;
+
+        public static List<OpenCvSharp.Point> lstPolyPnts = new List<OpenCvSharp.Point>();
+        public static List<List<OpenCvSharp.Point>> lstPolyElems = new List<List<OpenCvSharp.Point>>();
+
 
 
 
@@ -58,6 +67,7 @@ namespace IMGPROCAPP_WINDESKTOP
                     btn_maskImg.Enabled = true;
                     btn_clr_proc.Enabled = true;
                     btn_set_Params.Enabled = true;
+                    btn_run_proc.Enabled = true;
                 }
             }
             catch (Exception ex)
@@ -123,15 +133,79 @@ namespace IMGPROCAPP_WINDESKTOP
 
         }
 
+        private void btn_maskImg_Click(object sender, EventArgs e)
+        {
+            Mat imgObj = new Mat();
+            btn_maskImg.Enabled = false;
+            numPolyPnts = 0;
+
+            if(imgCut == null) { imgObj = imgRead.Clone();}
+            else { imgObj = imgCut.Clone();}
+
+
+            // create window...
+            window winMask = new window(WINDOW_MASK);
+            winMask.setWindow(imgObj, sender);
+
+            // make callback instance.
+            mousecallback_imgmask mcImgMask = new mousecallback_imgmask();
+
+            // set mouse event handler...
+            imgWork = imgObj.Clone();
+            Cv2.SetMouseCallback(WINDOW_MASK, mcImgMask.callBackFunc);
+
+            while (true)
+            {
+                Cv2.ImShow(WINDOW_MASK, imgWork);
+                int rtnKey = Cv2.WaitKey(0);
+
+                if (rtnKey == 32 && lstPolyElems.Count != 0)    // space bar key
+                {
+                    string msg = "Mask img ? ";
+                    string caption = "Confirm Mask Img";
+                    MessageBoxButtons msgBoxBtn = MessageBoxButtons.YesNo;
+                    DialogResult result;
+
+                    result = MessageBox.Show(msg, caption, msgBoxBtn);
+                    if (result == DialogResult.Yes)
+                    {
+                        dlgProc_maskImg();
+                        Cv2.DestroyWindow(WINDOW_MASK);
+                        break;
+                    }
+                    else
+                    {
+                        numPolyPnts = 0;
+                    }
+                }
+                else { continue; }
+            }
+
+
+
+        }
+
         private void dlgProc_cutImg() {
-            Console.WriteLine("yes clicked...");
+            Console.WriteLine("yes clicked on Cut Process...");
             btn_cutImg.Enabled = true;
 
-            Cv2.CvtColor(imgRead, imgGray, ColorConversionCodes.BGR2GRAY);  // change color space into gray.
-            Mat rstImg = new Mat(imgGray, cutRect_G);   // cut img with rect object.
+            Mat rstImg = new Mat(imgRead, cutRect_G);   // cut img with rect object.
+            imgCut = rstImg.Clone();
 
             // put cut img into result pictureBox.
             pic_rst.Image = BitmapConverter.ToBitmap(rstImg);
+        }
+
+        private void dlgProc_maskImg()
+        {
+            Console.WriteLine("yes clicked on Mask Process...");
+            btn_maskImg.Enabled = true;
+
+            // update masked img.
+            //Mat rstImg = 
+
+            // put cut img into result pictureBox.
+            //pic_rst.Image = BitmapConverter.ToBitmap(rstImg);
         }
 
         private void init_btns(int sw)
@@ -139,15 +213,22 @@ namespace IMGPROCAPP_WINDESKTOP
             /*
              sw(switch)
                 0 : status for loading this form.
-             
+                1 : reset running process.
              
              */
 
             switch (sw) {
             
                 case 0:
+                    // reset and clear all.
                     pic_org.Image = null;
                     pic_rst.Image = null;
+
+                    imgRead = null;
+                    imgCut = null;
+                    imgMask = null;
+
+                    lstPolyPnts.Clear();
 
                     btn_clear.Enabled = true;
                     btn_load.Enabled = true;
@@ -165,18 +246,17 @@ namespace IMGPROCAPP_WINDESKTOP
 
                     break;
                 case 1:
+                    // reset processing.
+
+
+
                     break;
 
                 default:
                     break;
             }
-
-
-
-
-
-
-
         }
+
+        
     }
 }
