@@ -364,3 +364,6 @@ FodyWeavers.xsd
 
 *.dll
 *.config
+*.sln
+**/Properties/**
+**/*.csproj

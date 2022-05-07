@@ -32,7 +32,7 @@ namespace IMGPROCAPP_WINDESKTOP
             if (@event == MouseEventTypes.LButtonDown) {
                 procLeftBtn(x,y);
             }
-            else if(@event == MouseEventTypes.MButtonDown && numSqurePnt == 2) {   // finish status.
+            else if(@event == MouseEventTypes.MButtonDown && lstSqurePnt.Count() == 2) {   // finish status.
                 procMidBtn();
             }
             else if(@event == MouseEventTypes.RButtonDown) {   // reset status.
@@ -48,21 +48,14 @@ namespace IMGPROCAPP_WINDESKTOP
         private void procLeftBtn(int x, int y) {
             if (numSqurePnt == 0)
             {
+                lstSqurePnt.Clear();
                 imgShowLocal = form_caseA.imgWork.Clone();
-                form_caseA.numSqrtPnts = numSqurePnt;
             }
 
             numSqurePnt++;
             lstSqurePnt.Add(new Point(x, y));
 
-            if (numSqurePnt > 2)
-            {
-                lstSqurePnt.Clear();
-                numSqurePnt = 0;
-                imgShowLocal.Dispose();
-                imgShowLocal = form_caseA.imgWork.Clone();
-            }
-            else if (numSqurePnt == 2)
+            if (numSqurePnt == 2)
             {
                 int width = lstSqurePnt[1].X - lstSqurePnt[0].X;
                 int height = lstSqurePnt[1].Y - lstSqurePnt[0].Y;
@@ -70,6 +63,7 @@ namespace IMGPROCAPP_WINDESKTOP
                 rect = new Rect(lstSqurePnt[0].X, lstSqurePnt[0].Y, width, height);
                 Cv2.Circle(imgShowLocal, new Point(x, y), circleRad, readyColor, circleThick);
                 Cv2.Rectangle(imgShowLocal, rect, readyColor, rectThick, LineTypes.Link4);
+                numSqurePnt = 0;
             }
             else
             {
@@ -80,7 +74,7 @@ namespace IMGPROCAPP_WINDESKTOP
         private void procMidBtn() {
             // copy rect object into global scope.
             form_caseA.cutRect_G = rect;
-            form_caseA.numSqrtPnts = numSqurePnt;
+            form_caseA.lstSqrtPnts.AddRange(new List<Point>(lstSqurePnt));
 
             Cv2.Rectangle(imgShowLocal, rect, selectedColor, (rectThick + 3), LineTypes.Link4);
         }
@@ -88,9 +82,9 @@ namespace IMGPROCAPP_WINDESKTOP
             numSqurePnt = 0;
             lstSqurePnt.Clear();
             imgShowLocal.Dispose();
+            form_caseA.lstSqrtPnts.Clear();
 
             imgShowLocal = form_caseA.imgWork.Clone();
-            form_caseA.numSqrtPnts = numSqurePnt;
         }
 
         ~mousecallback_imgcut() {

@@ -26,9 +26,9 @@ namespace IMGPROCAPP_WINDESKTOP
         public static Mat imgMask = new Mat();
 
         public static Rect cutRect_G = new Rect();
-        public static int numSqrtPnts;
         public static int numPolyPnts;
 
+        public static List<OpenCvSharp.Point> lstSqrtPnts = new List<OpenCvSharp.Point>();
         public static List<OpenCvSharp.Point> lstPolyPnts = new List<OpenCvSharp.Point>();
         public static List<List<OpenCvSharp.Point>> lstPolyElems = new List<List<OpenCvSharp.Point>>();
 
@@ -88,7 +88,6 @@ namespace IMGPROCAPP_WINDESKTOP
         private void btn_cutImg_Click(object sender, EventArgs e)
         {
             btn_cutImg.Enabled = false;
-            numSqrtPnts = 0;
 
             // create window...
             window winCut = new window(WINDOW_CUT);
@@ -107,7 +106,7 @@ namespace IMGPROCAPP_WINDESKTOP
                 Cv2.ImShow(WINDOW_CUT, imgWork);
                 int rtnKey = Cv2.WaitKey(0);
 
-                if (rtnKey == 32 && numSqrtPnts == 2)    // space bar key
+                if (rtnKey == 32 && lstSqrtPnts.Count() == 2)    // space bar key
                 {
                     string msg = "Cut img ? ";
                     string caption = "Confirm Cut Img";
@@ -123,7 +122,7 @@ namespace IMGPROCAPP_WINDESKTOP
                     }
                     else
                     {
-                        numSqrtPnts = 0;
+
                     }
                 }
                 else { continue; }
