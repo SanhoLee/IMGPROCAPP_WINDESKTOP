@@ -201,11 +201,28 @@ namespace IMGPROCAPP_WINDESKTOP
             Console.WriteLine("yes clicked on Mask Process...");
             btn_maskImg.Enabled = true;
 
-            // update masked img.
-            //Mat rstImg = 
+            // make gray img from src.
+            Mat imgObj = getCurrentImg();
+            Cv2.CvtColor(imgObj, imgObj, ColorConversionCodes.BGR2GRAY);
 
-            // put cut img into result pictureBox.
-            //pic_rst.Image = BitmapConverter.ToBitmap(rstImg);
+            // normalizing pixel value between 0 to 1.
+            double maxValue = 0.0f;
+            double minValue = 0.0f;
+            Cv2.MinMaxIdx(imgObj, out minValue, out maxValue);
+            imgObj = imgObj / maxValue;
+
+            // masking with poly elems
+            for(int i = 0; i < lstPolyElems.Count(); i++)
+            {
+                Cv2.FillPoly(imgObj, InputArray.Create(lstPolyElems[i]), new Scalar(1));
+            }
+
+            // put and show masked img into result pictureBox.
+            pic_rst.Image = BitmapConverter.ToBitmap(imgObj*255);
+
+            // update img data
+            imgMask = imgObj.Clone();
+            imgObj.Dispose();
         }
 
         private void init_btns(int sw)
@@ -257,6 +274,22 @@ namespace IMGPROCAPP_WINDESKTOP
             }
         }
 
-        
+        private Mat getCurrentImg()
+        {
+            Mat rtn = new Mat();
+
+
+            if (imgCut != null)
+            {
+                rtn = imgCut.Clone();
+            }
+            else
+            {
+                rtn = imgRead.Clone();
+            }
+
+            return rtn;
+        }
+
     }
 }
