@@ -78,10 +78,12 @@ namespace IMGPROCAPP_WINDESKTOP
 
         private void btn_clear_Click(object sender, EventArgs e)
         {
-            if (pic_org.Image != null) {
-                init_btns(0);
-            }
+            init_btns(0);
+        }
 
+        private void btn_clr_proc_Click(object sender, EventArgs e)
+        {
+            init_btns(1);
         }
 
 
@@ -179,9 +181,30 @@ namespace IMGPROCAPP_WINDESKTOP
                 }
                 else { continue; }
             }
+        }
 
+        private void btn_run_proc_Click(object sender, EventArgs e)
+        {
 
+            // make gray img from src.
+            Mat imgObj = getCurrentImg();
+            if (imgObj.Type() != MatType.CV_8UC1)
+            {
+                Cv2.CvtColor(imgObj, imgObj, ColorConversionCodes.BGR2GRAY);
+            }
 
+            // edge detector(canny) and blur img.
+            double lowThres = 130.0f;
+            double highThres = 250.0f;
+            int ksize = 5;
+            Mat imgBlur = new Mat(imgObj.Size(), MatType.CV_8UC1);
+            Mat imgCanny = new Mat(imgObj.Size(), MatType.CV_8UC1);
+
+            Cv2.GaussianBlur(imgObj, imgBlur, new OpenCvSharp.Size(ksize,ksize), 1, 0, BorderTypes.Default);
+            Cv2.Canny(imgBlur, imgCanny, lowThres, highThres);
+
+            // show on result picturebox.
+            pic_rst.Image = BitmapConverter.ToBitmap(imgCanny);
         }
 
         private void dlgProc_cutImg() {
@@ -200,24 +223,19 @@ namespace IMGPROCAPP_WINDESKTOP
             Console.WriteLine("yes clicked on Mask Process...");
             btn_maskImg.Enabled = true;
 
-            // make gray img from src.
+            // get current img
             Mat imgObj = getCurrentImg();
-            Cv2.CvtColor(imgObj, imgObj, ColorConversionCodes.BGR2GRAY);
 
-            // normalizing pixel value between 0 to 1.
-            double maxValue = 0.0f;
-            double minValue = 0.0f;
-            Cv2.MinMaxIdx(imgObj, out minValue, out maxValue);
-            imgObj = imgObj / maxValue;
+            
 
             // masking with poly elems
             for(int i = 0; i < lstPolyElems.Count(); i++)
             {
-                Cv2.FillPoly(imgObj, InputArray.Create(lstPolyElems[i]), new Scalar(1));
+                Cv2.FillPoly(imgObj, InputArray.Create(lstPolyElems[i]), new Scalar(255,255,255));
             }
 
             // put and show masked img into result pictureBox.
-            pic_rst.Image = BitmapConverter.ToBitmap(imgObj*255);
+            pic_rst.Image = BitmapConverter.ToBitmap(imgObj);
 
             // update img data
             imgMask = imgObj.Clone();
@@ -263,7 +281,8 @@ namespace IMGPROCAPP_WINDESKTOP
                     break;
                 case 1:
                     // reset processing.
-
+                    Mat imgObj = getCurrentImg();
+                    pic_rst.Image = BitmapConverter.ToBitmap(imgObj);
 
 
                     break;
@@ -277,8 +296,11 @@ namespace IMGPROCAPP_WINDESKTOP
         {
             Mat rtn = new Mat();
 
-
-            if (imgCut != null)
+            if(imgMask != null) 
+            { 
+                rtn = imgMask.Clone(); 
+            }
+            else if (imgCut != null)
             {
                 rtn = imgCut.Clone();
             }
@@ -289,6 +311,9 @@ namespace IMGPROCAPP_WINDESKTOP
 
             return rtn;
         }
+
+        
+
 
     }
 }
