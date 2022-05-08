@@ -108,6 +108,7 @@
   <ItemGroup>
     <Compile Include="callback\mousecallback_imgcut.cs" />
     <Compile Include="callback\mousecallback_imgmask.cs" />
+    <Compile Include="edgeDetector.cs" />
     <Compile Include="views\entry.cs">
       <SubType>Form</SubType>
     </Compile>

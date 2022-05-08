@@ -196,15 +196,19 @@ namespace IMGPROCAPP_WINDESKTOP
             // edge detector(canny) and blur img.
             double lowThres = 130.0f;
             double highThres = 250.0f;
-            int ksize = 5;
-            Mat imgBlur = new Mat(imgObj.Size(), MatType.CV_8UC1);
-            Mat imgCanny = new Mat(imgObj.Size(), MatType.CV_8UC1);
+            int ksize = 3;
 
-            Cv2.GaussianBlur(imgObj, imgBlur, new OpenCvSharp.Size(ksize,ksize), 1, 0, BorderTypes.Default);
-            Cv2.Canny(imgBlur, imgCanny, lowThres, highThres);
+            edgeDetector edCanny = new edgeDetector(imgObj);
+            edCanny.ksize = ksize;
+            edCanny.lowThres = lowThres;
+            edCanny.highThres = highThres;
+
+            edCanny.blurImg();
+            Mat imgCanny = edCanny.detectEdge();
 
             // show on result picturebox.
             pic_rst.Image = BitmapConverter.ToBitmap(imgCanny);
+
         }
 
         private void dlgProc_cutImg() {
