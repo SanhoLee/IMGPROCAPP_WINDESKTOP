@@ -129,6 +129,12 @@
     <Compile Include="views\form_caseB.Designer.cs">
       <DependentUpon>form_caseB.cs</DependentUpon>
     </Compile>
+    <Compile Include="views\form_params.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\form_params.Designer.cs">
+      <DependentUpon>form_params.cs</DependentUpon>
+    </Compile>
     <Compile Include="window.cs" />
     <EmbeddedResource Include="views\entry.resx">
       <DependentUpon>entry.cs</DependentUpon>
@@ -148,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="views\form_caseB.resx">
       <DependentUpon>form_caseB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\form_params.resx">
+      <DependentUpon>form_params.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

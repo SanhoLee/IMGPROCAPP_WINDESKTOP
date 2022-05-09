@@ -47,9 +47,10 @@
             // 
             // btn_close
             // 
-            this.btn_close.Location = new System.Drawing.Point(532, 598);
+            this.btn_close.Location = new System.Drawing.Point(760, 897);
+            this.btn_close.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_close.Name = "btn_close";
-            this.btn_close.Size = new System.Drawing.Size(164, 39);
+            this.btn_close.Size = new System.Drawing.Size(234, 58);
             this.btn_close.TabIndex = 5;
             this.btn_close.Text = "Close";
             this.btn_close.UseVisualStyleBackColor = true;
@@ -57,9 +58,10 @@
             // 
             // btn_load
             // 
-            this.btn_load.Location = new System.Drawing.Point(532, 109);
+            this.btn_load.Location = new System.Drawing.Point(760, 164);
+            this.btn_load.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_load.Name = "btn_load";
-            this.btn_load.Size = new System.Drawing.Size(164, 40);
+            this.btn_load.Size = new System.Drawing.Size(234, 60);
             this.btn_load.TabIndex = 6;
             this.btn_load.Text = "Load";
             this.btn_load.UseVisualStyleBackColor = true;
@@ -68,9 +70,10 @@
             // pic_org
             // 
             this.pic_org.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pic_org.Location = new System.Drawing.Point(38, 65);
+            this.pic_org.Location = new System.Drawing.Point(54, 98);
+            this.pic_org.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pic_org.Name = "pic_org";
-            this.pic_org.Size = new System.Drawing.Size(474, 271);
+            this.pic_org.Size = new System.Drawing.Size(676, 406);
             this.pic_org.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic_org.TabIndex = 7;
             this.pic_org.TabStop = false;
@@ -78,9 +81,10 @@
             // pic_rst
             // 
             this.pic_rst.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pic_rst.Location = new System.Drawing.Point(38, 367);
+            this.pic_rst.Location = new System.Drawing.Point(54, 550);
+            this.pic_rst.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pic_rst.Name = "pic_rst";
-            this.pic_rst.Size = new System.Drawing.Size(474, 271);
+            this.pic_rst.Size = new System.Drawing.Size(676, 406);
             this.pic_rst.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic_rst.TabIndex = 8;
             this.pic_rst.TabStop = false;
@@ -88,28 +92,27 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 51);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(51, 76);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 12);
+            this.label1.Size = new System.Drawing.Size(83, 18);
             this.label1.TabIndex = 9;
             this.label1.Text = "ORIGINAL";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(36, 352);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(51, 528);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 12);
+            this.label2.Size = new System.Drawing.Size(71, 18);
             this.label2.TabIndex = 10;
             this.label2.Text = "RESULT";
             // 
             // btn_cutImg
             // 
-            this.btn_cutImg.Location = new System.Drawing.Point(532, 249);
+            this.btn_cutImg.Location = new System.Drawing.Point(760, 374);
+            this.btn_cutImg.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_cutImg.Name = "btn_cutImg";
-            this.btn_cutImg.Size = new System.Drawing.Size(164, 40);
+            this.btn_cutImg.Size = new System.Drawing.Size(234, 60);
             this.btn_cutImg.TabIndex = 11;
             this.btn_cutImg.Text = "Cut with 2P.";
             this.btn_cutImg.UseVisualStyleBackColor = true;
@@ -117,9 +120,10 @@
             // 
             // btn_maskImg
             // 
-            this.btn_maskImg.Location = new System.Drawing.Point(532, 295);
+            this.btn_maskImg.Location = new System.Drawing.Point(760, 442);
+            this.btn_maskImg.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_maskImg.Name = "btn_maskImg";
-            this.btn_maskImg.Size = new System.Drawing.Size(164, 40);
+            this.btn_maskImg.Size = new System.Drawing.Size(234, 60);
             this.btn_maskImg.TabIndex = 12;
             this.btn_maskImg.Text = "Mask with 4P.";
             this.btn_maskImg.UseVisualStyleBackColor = true;
@@ -127,9 +131,10 @@
             // 
             // btn_clear
             // 
-            this.btn_clear.Location = new System.Drawing.Point(532, 65);
+            this.btn_clear.Location = new System.Drawing.Point(760, 98);
+            this.btn_clear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_clear.Name = "btn_clear";
-            this.btn_clear.Size = new System.Drawing.Size(164, 40);
+            this.btn_clear.Size = new System.Drawing.Size(234, 60);
             this.btn_clear.TabIndex = 13;
             this.btn_clear.Text = "Clear";
             this.btn_clear.UseVisualStyleBackColor = true;
@@ -137,27 +142,31 @@
             // 
             // btn_Save
             // 
-            this.btn_Save.Location = new System.Drawing.Point(532, 554);
+            this.btn_Save.Location = new System.Drawing.Point(760, 831);
+            this.btn_Save.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(164, 39);
+            this.btn_Save.Size = new System.Drawing.Size(234, 58);
             this.btn_Save.TabIndex = 14;
             this.btn_Save.Text = "Save Pixels";
             this.btn_Save.UseVisualStyleBackColor = true;
             // 
             // btn_set_Params
             // 
-            this.btn_set_Params.Location = new System.Drawing.Point(532, 413);
+            this.btn_set_Params.Location = new System.Drawing.Point(760, 620);
+            this.btn_set_Params.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_set_Params.Name = "btn_set_Params";
-            this.btn_set_Params.Size = new System.Drawing.Size(164, 40);
+            this.btn_set_Params.Size = new System.Drawing.Size(234, 60);
             this.btn_set_Params.TabIndex = 15;
             this.btn_set_Params.Text = "Set Parameters";
             this.btn_set_Params.UseVisualStyleBackColor = true;
+            this.btn_set_Params.Click += new System.EventHandler(this.btn_set_Params_Click);
             // 
             // btn_run_proc
             // 
-            this.btn_run_proc.Location = new System.Drawing.Point(532, 459);
+            this.btn_run_proc.Location = new System.Drawing.Point(760, 688);
+            this.btn_run_proc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_run_proc.Name = "btn_run_proc";
-            this.btn_run_proc.Size = new System.Drawing.Size(164, 40);
+            this.btn_run_proc.Size = new System.Drawing.Size(234, 60);
             this.btn_run_proc.TabIndex = 16;
             this.btn_run_proc.Text = "Run Processing";
             this.btn_run_proc.UseVisualStyleBackColor = true;
@@ -165,9 +174,10 @@
             // 
             // btn_clr_proc
             // 
-            this.btn_clr_proc.Location = new System.Drawing.Point(532, 367);
+            this.btn_clr_proc.Location = new System.Drawing.Point(760, 550);
+            this.btn_clr_proc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_clr_proc.Name = "btn_clr_proc";
-            this.btn_clr_proc.Size = new System.Drawing.Size(164, 40);
+            this.btn_clr_proc.Size = new System.Drawing.Size(234, 60);
             this.btn_clr_proc.TabIndex = 17;
             this.btn_clr_proc.Text = "Clear Processing";
             this.btn_clr_proc.UseVisualStyleBackColor = true;
@@ -175,9 +185,9 @@
             // 
             // form_caseA
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(709, 675);
+            this.ClientSize = new System.Drawing.Size(1013, 1012);
             this.Controls.Add(this.btn_clr_proc);
             this.Controls.Add(this.btn_run_proc);
             this.Controls.Add(this.btn_set_Params);
@@ -191,6 +201,7 @@
             this.Controls.Add(this.pic_org);
             this.Controls.Add(this.btn_load);
             this.Controls.Add(this.btn_close);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "form_caseA";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "form_caseA";

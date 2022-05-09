@@ -31,6 +31,7 @@ namespace IMGPROCAPP_WINDESKTOP
 
         public void blurImg() {
             Cv2.GaussianBlur(imgInit, imgBlur, new OpenCvSharp.Size(ksize, ksize), 1, 0, BorderTypes.Default);
+            Console.WriteLine("blurImg Method :: ksize - " + ksize);
         }
 
         public Mat detectEdge() {
@@ -38,6 +39,7 @@ namespace IMGPROCAPP_WINDESKTOP
 
             try {
                 Cv2.Canny(imgBlur, imgCanny, lowThres, highThres);
+                Console.WriteLine("detectEdge Method :: low - " + lowThres + ", high - " + highThres);
             }
             catch (Exception e) {
                 Console.WriteLine(e.Message);

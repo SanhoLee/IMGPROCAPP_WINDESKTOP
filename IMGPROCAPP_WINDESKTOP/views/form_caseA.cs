@@ -32,6 +32,15 @@ namespace IMGPROCAPP_WINDESKTOP
         public static List<OpenCvSharp.Point> lstPolyPnts = new List<OpenCvSharp.Point>();
         public static List<List<OpenCvSharp.Point>> lstPolyElems = new List<List<OpenCvSharp.Point>>();
 
+        // edge detector(canny) and blur img.
+        public static double lowThres = 130.0f;
+        public static double highThres = 250.0f;
+        public static int ksize = 3;
+
+        private  int _ALL = 0;
+        private  int _PROC = 1;
+        private  int _LIST = 2;
+
 
 
 
@@ -43,7 +52,7 @@ namespace IMGPROCAPP_WINDESKTOP
         private void form_caseA_Load(object sender, EventArgs e)
         {
             // initializing...
-            init_btns(0);
+            init_status(_ALL);
 
         }
 
@@ -68,6 +77,8 @@ namespace IMGPROCAPP_WINDESKTOP
                     btn_clr_proc.Enabled = true;
                     btn_set_Params.Enabled = true;
                     btn_run_proc.Enabled = true;
+
+                    init_status(_LIST);
                 }
             }
             catch (Exception ex)
@@ -78,12 +89,12 @@ namespace IMGPROCAPP_WINDESKTOP
 
         private void btn_clear_Click(object sender, EventArgs e)
         {
-            init_btns(0);
+            init_status(_ALL);
         }
 
         private void btn_clr_proc_Click(object sender, EventArgs e)
         {
-            init_btns(1);
+            init_status(_PROC);
         }
 
 
@@ -193,10 +204,7 @@ namespace IMGPROCAPP_WINDESKTOP
                 Cv2.CvtColor(imgObj, imgObj, ColorConversionCodes.BGR2GRAY);
             }
 
-            // edge detector(canny) and blur img.
-            double lowThres = 130.0f;
-            double highThres = 250.0f;
-            int ksize = 3;
+            
 
             edgeDetector edCanny = new edgeDetector(imgObj);
             edCanny.ksize = ksize;
@@ -209,6 +217,7 @@ namespace IMGPROCAPP_WINDESKTOP
             // show on result picturebox.
             pic_rst.Image = BitmapConverter.ToBitmap(imgCanny);
 
+            btn_Save.Enabled = true;
         }
 
         private void dlgProc_cutImg() {
@@ -246,7 +255,7 @@ namespace IMGPROCAPP_WINDESKTOP
             imgObj.Dispose();
         }
 
-        private void init_btns(int sw)
+        private void init_status(int sw)
         {
             /*
              sw(switch)
@@ -266,7 +275,9 @@ namespace IMGPROCAPP_WINDESKTOP
                     imgCut = null;
                     imgMask = null;
 
+                    lstSqrtPnts.Clear();
                     lstPolyPnts.Clear();
+                    lstPolyElems.Clear();
 
                     btn_clear.Enabled = true;
                     btn_load.Enabled = true;
@@ -288,7 +299,14 @@ namespace IMGPROCAPP_WINDESKTOP
                     Mat imgObj = getCurrentImg();
                     pic_rst.Image = BitmapConverter.ToBitmap(imgObj);
 
+                    btn_Save.Enabled = false;
+                    break;
 
+                case 2:
+                    // only list variables.
+                    lstSqrtPnts.Clear();
+                    lstPolyPnts.Clear();
+                    lstPolyElems.Clear();
                     break;
 
                 default:
@@ -316,8 +334,10 @@ namespace IMGPROCAPP_WINDESKTOP
             return rtn;
         }
 
-        
-
-
+        private void btn_set_Params_Click(object sender, EventArgs e)
+        {
+            form_params frmParams = new form_params();
+            frmParams.ShowDialog();
+        }
     }
 }
