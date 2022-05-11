@@ -48,7 +48,7 @@
             // btn_close
             // 
             this.btn_close.Location = new System.Drawing.Point(760, 897);
-            this.btn_close.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_close.Margin = new System.Windows.Forms.Padding(4);
             this.btn_close.Name = "btn_close";
             this.btn_close.Size = new System.Drawing.Size(234, 58);
             this.btn_close.TabIndex = 5;
@@ -59,7 +59,7 @@
             // btn_load
             // 
             this.btn_load.Location = new System.Drawing.Point(760, 164);
-            this.btn_load.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_load.Margin = new System.Windows.Forms.Padding(4);
             this.btn_load.Name = "btn_load";
             this.btn_load.Size = new System.Drawing.Size(234, 60);
             this.btn_load.TabIndex = 6;
@@ -71,7 +71,7 @@
             // 
             this.pic_org.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pic_org.Location = new System.Drawing.Point(54, 98);
-            this.pic_org.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pic_org.Margin = new System.Windows.Forms.Padding(4);
             this.pic_org.Name = "pic_org";
             this.pic_org.Size = new System.Drawing.Size(676, 406);
             this.pic_org.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -82,7 +82,7 @@
             // 
             this.pic_rst.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pic_rst.Location = new System.Drawing.Point(54, 550);
-            this.pic_rst.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pic_rst.Margin = new System.Windows.Forms.Padding(4);
             this.pic_rst.Name = "pic_rst";
             this.pic_rst.Size = new System.Drawing.Size(676, 406);
             this.pic_rst.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -110,7 +110,7 @@
             // btn_cutImg
             // 
             this.btn_cutImg.Location = new System.Drawing.Point(760, 374);
-            this.btn_cutImg.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_cutImg.Margin = new System.Windows.Forms.Padding(4);
             this.btn_cutImg.Name = "btn_cutImg";
             this.btn_cutImg.Size = new System.Drawing.Size(234, 60);
             this.btn_cutImg.TabIndex = 11;
@@ -121,7 +121,7 @@
             // btn_maskImg
             // 
             this.btn_maskImg.Location = new System.Drawing.Point(760, 442);
-            this.btn_maskImg.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_maskImg.Margin = new System.Windows.Forms.Padding(4);
             this.btn_maskImg.Name = "btn_maskImg";
             this.btn_maskImg.Size = new System.Drawing.Size(234, 60);
             this.btn_maskImg.TabIndex = 12;
@@ -132,7 +132,7 @@
             // btn_clear
             // 
             this.btn_clear.Location = new System.Drawing.Point(760, 98);
-            this.btn_clear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_clear.Margin = new System.Windows.Forms.Padding(4);
             this.btn_clear.Name = "btn_clear";
             this.btn_clear.Size = new System.Drawing.Size(234, 60);
             this.btn_clear.TabIndex = 13;
@@ -143,17 +143,18 @@
             // btn_Save
             // 
             this.btn_Save.Location = new System.Drawing.Point(760, 831);
-            this.btn_Save.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Save.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(234, 58);
             this.btn_Save.TabIndex = 14;
             this.btn_Save.Text = "Save Pixels";
             this.btn_Save.UseVisualStyleBackColor = true;
+            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 
             // btn_set_Params
             // 
             this.btn_set_Params.Location = new System.Drawing.Point(760, 620);
-            this.btn_set_Params.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_set_Params.Margin = new System.Windows.Forms.Padding(4);
             this.btn_set_Params.Name = "btn_set_Params";
             this.btn_set_Params.Size = new System.Drawing.Size(234, 60);
             this.btn_set_Params.TabIndex = 15;
@@ -164,7 +165,7 @@
             // btn_run_proc
             // 
             this.btn_run_proc.Location = new System.Drawing.Point(760, 688);
-            this.btn_run_proc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_run_proc.Margin = new System.Windows.Forms.Padding(4);
             this.btn_run_proc.Name = "btn_run_proc";
             this.btn_run_proc.Size = new System.Drawing.Size(234, 60);
             this.btn_run_proc.TabIndex = 16;
@@ -175,7 +176,7 @@
             // btn_clr_proc
             // 
             this.btn_clr_proc.Location = new System.Drawing.Point(760, 550);
-            this.btn_clr_proc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_clr_proc.Margin = new System.Windows.Forms.Padding(4);
             this.btn_clr_proc.Name = "btn_clr_proc";
             this.btn_clr_proc.Size = new System.Drawing.Size(234, 60);
             this.btn_clr_proc.TabIndex = 17;
@@ -201,7 +202,7 @@
             this.Controls.Add(this.pic_org);
             this.Controls.Add(this.btn_load);
             this.Controls.Add(this.btn_close);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "form_caseA";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "form_caseA";

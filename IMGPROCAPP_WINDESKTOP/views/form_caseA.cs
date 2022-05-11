@@ -24,6 +24,7 @@ namespace IMGPROCAPP_WINDESKTOP
         public static Mat imgGray = new Mat();
         public static Mat imgCut = new Mat();
         public static Mat imgMask = new Mat();
+        public static Mat imgProc = new Mat();
 
         public static Rect cutRect_G = new Rect();
         public static int numPolyPnts;
@@ -216,6 +217,8 @@ namespace IMGPROCAPP_WINDESKTOP
 
             // show on result picturebox.
             pic_rst.Image = BitmapConverter.ToBitmap(imgCanny);
+            imgProc = imgCanny.Clone();
+            imgCanny.Dispose();
 
             btn_Save.Enabled = true;
         }
@@ -274,6 +277,7 @@ namespace IMGPROCAPP_WINDESKTOP
                     imgRead = null;
                     imgCut = null;
                     imgMask = null;
+                    imgProc = null;
 
                     lstSqrtPnts.Clear();
                     lstPolyPnts.Clear();
@@ -318,9 +322,9 @@ namespace IMGPROCAPP_WINDESKTOP
         {
             Mat rtn = new Mat();
 
-            if(imgMask != null) 
-            { 
-                rtn = imgMask.Clone(); 
+            if (imgMask != null)
+            {
+                rtn = imgMask.Clone();
             }
             else if (imgCut != null)
             {
@@ -338,6 +342,35 @@ namespace IMGPROCAPP_WINDESKTOP
         {
             form_params frmParams = new form_params();
             frmParams.ShowDialog();
+        }
+
+        private void btn_Save_Click(object sender, EventArgs e)
+        {
+            string msg = "Save data into CSV format ? ";
+            string caption = "Confirm Save Data.";
+            MessageBoxButtons msgBoxBtn = MessageBoxButtons.YesNo;
+            DialogResult result;
+
+            result = MessageBox.Show(msg, caption, msgBoxBtn);
+            if (result == DialogResult.Yes)
+            {
+                // save data
+                Console.WriteLine("Save data...Run...");
+                if(!imgProc.Empty()) {
+                    // get non-zero pixel position as list.
+                    // loop? findnonZero?
+
+
+                    // save list element into csv format file.
+                
+                }
+            }
+            else
+            {
+                // Cancel
+                Console.WriteLine("Cancel Save data...");
+            }
+
         }
     }
 }
