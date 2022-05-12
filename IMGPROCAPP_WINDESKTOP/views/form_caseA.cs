@@ -357,7 +357,24 @@ namespace IMGPROCAPP_WINDESKTOP
                 // save data
                 Console.WriteLine("Save data...Run...");
                 if(!imgProc.Empty()) {
+
+                    Mat imgCheck = new Mat(imgProc.Size(), MatType.CV_8UC3);
+
                     // get non-zero pixel position as list.
+                    Mat nonZeroIdx = new Mat();
+                    Cv2.FindNonZero(imgProc, nonZeroIdx);
+
+                    for (int i = 0; i < nonZeroIdx.Total(); i++)
+                    {
+                        OpenCvSharp.Point tempPnt = new OpenCvSharp.Point();
+                        tempPnt.X = nonZeroIdx.At<OpenCvSharp.Point>(i).X;
+                        tempPnt.Y = nonZeroIdx.At<OpenCvSharp.Point>(i).Y;
+
+                        Cv2.Circle(imgCheck, tempPnt, 2, new Scalar(0, 0, 255), 2, LineTypes.Link4);
+                    }
+
+                    Cv2.ImShow("imgCheck", imgCheck);
+                    Cv2.WaitKey(0);
                     // loop? findnonZero?
 
 
