@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
@@ -358,28 +354,25 @@ namespace IMGPROCAPP_WINDESKTOP
                 Console.WriteLine("Save data...Run...");
                 if(!imgProc.Empty()) {
 
-                    Mat imgCheck = new Mat(imgProc.Size(), MatType.CV_8UC3);
-
-                    // get non-zero pixel position as list.
-                    Mat nonZeroIdx = new Mat();
-                    Cv2.FindNonZero(imgProc, nonZeroIdx);
-
-                    for (int i = 0; i < nonZeroIdx.Total(); i++)
+                    try
                     {
-                        OpenCvSharp.Point tempPnt = new OpenCvSharp.Point();
-                        tempPnt.X = nonZeroIdx.At<OpenCvSharp.Point>(i).X;
-                        tempPnt.Y = nonZeroIdx.At<OpenCvSharp.Point>(i).Y;
+                        SaveFileDialog sfd = new SaveFileDialog();
+                        sfd.Filter = "CSV Files | *.csv|Text Files | *.txt";
+                        sfd.DefaultExt = "csv";
+                        if (sfd.ShowDialog() == DialogResult.OK)
+                        {
+                            string fname = sfd.FileName;
+                            Console.WriteLine(fname);
 
-                        Cv2.Circle(imgCheck, tempPnt, 2, new Scalar(0, 0, 255), 2, LineTypes.Link4);
+                            // filestream for save data.
+                            savePntsData(imgProc, fname);
+                        }
+                        else { return; }
                     }
-
-                    Cv2.ImShow("imgCheck", imgCheck);
-                    Cv2.WaitKey(0);
-                    // loop? findnonZero?
-
-
-                    // save list element into csv format file.
-                
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
             }
             else
@@ -387,7 +380,38 @@ namespace IMGPROCAPP_WINDESKTOP
                 // Cancel
                 Console.WriteLine("Cancel Save data...");
             }
+        }
 
+
+
+        private void savePntsData(Mat imgSrc, string fname) 
+        {
+            Mat imgCheck = new Mat(imgProc.Size(), MatType.CV_8UC3);
+
+            // get non-zero pixel position as list.
+            Mat nonZeroIdx = new Mat();
+            Cv2.FindNonZero(imgSrc, nonZeroIdx);
+
+            OpenCvSharp.Point tempPnt = new OpenCvSharp.Point();
+            string saveLine;
+
+            using (StreamWriter oFile = new StreamWriter(fname, append: true))
+            {
+
+                for (int i = 0; i < nonZeroIdx.Total(); i++)
+                {
+                    tempPnt.X = nonZeroIdx.At<OpenCvSharp.Point>(i).X;
+                    tempPnt.Y = nonZeroIdx.At<OpenCvSharp.Point>(i).Y;
+                    
+                    saveLine = "";
+                    saveLine = tempPnt.X + "," + (tempPnt.Y*(-1)+imgSrc.Rows);
+                    oFile.WriteLine(saveLine);
+                    Console.WriteLine("write Point(x,y) : " + tempPnt);
+                }
+
+                oFile.WriteLine("**");  //end of file...
+                oFile.Close();
+            }
         }
     }
 }
