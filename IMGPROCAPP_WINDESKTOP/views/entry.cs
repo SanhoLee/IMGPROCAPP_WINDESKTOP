@@ -33,5 +33,11 @@ namespace IMGPROCAPP_WINDESKTOP
             form_caseA frmA = new form_caseA();
             frmA.ShowDialog();
         }
+
+        private void btn_CASE_B_Click(object sender, EventArgs e)
+        {
+            form_caseB frmB = new form_caseB();
+            frmB.ShowDialog();
+        }
     }
 }

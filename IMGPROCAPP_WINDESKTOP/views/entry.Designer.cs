@@ -61,6 +61,7 @@
             this.btn_CASE_B.TabIndex = 3;
             this.btn_CASE_B.Text = "CASE B";
             this.btn_CASE_B.UseVisualStyleBackColor = true;
+            this.btn_CASE_B.Click += new System.EventHandler(this.btn_CASE_B_Click);
             // 
             // frm_entry
             // 
