@@ -5,7 +5,7 @@ I wrote a scatter chart for the output file(csv format).
 
 It looks super same with what my app processing.🤤
 
-![img for app appearance](https://github.com/SanhoLee/IMGPROCAPP_WINDESKTOP/blob/master/img/overall_appearance_and_result.png?raw=true)
+![img for app appearance](img/overall_appearance_and_result.png)
 
 ## 🖼Main Features and IMG Processing Flow.
 1. Load IMG
