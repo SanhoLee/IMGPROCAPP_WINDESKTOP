@@ -1,9 +1,11 @@
 ﻿# 📺Desktop App for IMG Processing.
 This is What the app does. 😂
+
 I wrote a scatter chart for the output file(csv format).
+
 It looks super same with what my app processing.🤤
 
-
+![img for app appearance](https://github.com/SanhoLee/IMGPROCAPP_WINDESKTOP/blob/master/img/overall_appearance_and_result.png?raw=true)
 
 ## 🖼Main Features and IMG Processing Flow.
 1. Load IMG
