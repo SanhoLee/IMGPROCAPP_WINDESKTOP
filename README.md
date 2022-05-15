@@ -16,6 +16,13 @@ It looks super same with what my app processing.🤤
 6. Save Pixel Position with CSV Format.
 **2)~3) is optional.**
 
+### 🖱️Mouse Event Features
+***Common rule : If you want to Fix the selected status, Just Press middle button of mouse and Hit the Spacebar key. ⌨️***
+* CuttingIMG✂️ : Picking 2 Points from left top to right bottom, A rectangle area will be working area for next  processing.
+![mouseEvent_imgCut](img/mouseEvent_imgCut.gif)
+
+* Masking IMG 😷 : Pickng 4 Point either clock-wise or counter clock-wise direction, a polygon area which has 4 lines make Masking zone.
+![mouseEvent_imgMask](img/mouseEvent_imgMask.gif)
 
 ## ⚙️Development Environment
 * OS : Windows
